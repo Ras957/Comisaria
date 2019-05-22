@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -83,5 +85,16 @@ public class Metodos {
            devolver+=cadena+"\n";
        }
       return devolver;
+    }
+    
+    public static Sospechoso buscarSospechosoId(int id, ArrayList<Sospechoso> sos){
+        Sospechoso devolver = null;
+        
+        for(int i=0;i<sos.size();i++){
+            if(sos.get(i).getId()==id){
+                devolver=sos.get(i);
+            }
+        }
+        return devolver;
     }
 }
