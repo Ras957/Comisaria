@@ -20,7 +20,9 @@ public class Metodos {
         int size=sos.size();
         
         for(int i=0;i<size;i++){
-            m.addRow(new Object[]{sos.get(i).getId(),sos.get(i).getNombre(),sos.get(i).getApellidos()});
+            if(sos.get(i)!=null&&sos.get(i).getNombre()!=null){
+                m.addRow(new Object[]{sos.get(i).getId(),sos.get(i).getNombre(),sos.get(i).getApellidos()});
+            }
         }
     }
     
