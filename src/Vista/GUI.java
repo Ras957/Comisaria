@@ -199,7 +199,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(FormularioLayout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addComponent(jButton3)))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(390, Short.MAX_VALUE))
         );
         FormularioLayout.setVerticalGroup(
             FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

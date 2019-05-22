@@ -126,6 +126,12 @@ public class Estructura {
         return generada;
     }
     
+    public static int getMaxIDSospechoso(Conexion conn) throws SQLException{
+        int id = 0;
+        PreparedStatement stmt = conn.getMiConexion().prepareStatement("Select max(id) from sospechoso");
+        return id;
+    }
+    
     public static ArrayList<Sospechoso> getPersonFromBBDD(Conexion conn) throws SQLException {
         ArrayList<Sospechoso> AllSos=new ArrayList<>();
         String id = "";
@@ -297,5 +303,6 @@ public class Estructura {
 		return nFilas;
     }
 }
+
 
 
