@@ -275,6 +275,7 @@ public class Estructura {
         sos.setFotos(fotos);
         rs.close();
         stmt.close();
+        
         AllSos.add(sos);
         }
         
@@ -312,6 +313,7 @@ public class Estructura {
 		return nFilas;
     }
 }
+
 
 
 

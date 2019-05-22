@@ -6,8 +6,10 @@
 package Controlador;
 
 import Modelo.Conexion;
+import Modelo.Sospechoso;
 import Vista.GUI;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,17 +41,14 @@ public class Comisaria {
         if(Estructura.generarEstructura(con)){
             System.out.println("Tablas creadas correctamente");
         }
-        try {
-        int num = Estructura.getMaxIDSospechoso(con);
-            System.out.println(num);
-        } catch (SQLException ex) {
-            Logger.getLogger(Comisaria.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
         vista.setVisible(true);
     }
     
 }
+
+
+
+
 
 
 
