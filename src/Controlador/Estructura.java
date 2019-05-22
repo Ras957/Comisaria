@@ -138,7 +138,10 @@ public class Estructura {
     
     public static ArrayList<Sospechoso> getPersonFromBBDD(Conexion conn) throws SQLException {
         ArrayList<Sospechoso> AllSos=new ArrayList<>();
-        String id = "";
+        int max=getMaxIDSospechoso(conn);
+        
+        for(int i=1;i<max+1;i++){
+        String id = Integer.toString((i));
         
         PreparedStatement stmt = conn.getMiConexion().prepareStatement("SELECT * FROM SOSPECHOSO WHERE  Id=?");
         stmt.setString(1, id);
@@ -272,6 +275,7 @@ public class Estructura {
         sos.setFotos(fotos);
         rs.close();
         stmt.close();
+        }
         
         return AllSos;
     }
