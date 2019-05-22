@@ -1,0 +1,152 @@
+insert into Sospechoso(Nombre,Apellidos)
+	values ('Francisco','Carrasquilla');
+insert into Sospechoso(Nombre,Apellidos)
+	values ('Samuel','Osuna');
+insert into Sospechoso(Nombre,Apellidos)
+	values ('Daniel','Perez');
+insert into Sospechoso(Nombre,Apellidos)
+	values ('Daniel','Muriel');
+insert into Sospechoso(Nombre,Apellidos)
+	values ('Rodrigo','Rodriguez');
+insert into Sospechoso(Nombre,Apellidos)
+	values ('Ramon','Sanchez');
+insert into Sospechoso(Nombre,Apellidos)
+	values ('Antonio','Algo');
+insert into Sospechoso(Nombre,Apellidos)
+	values ('Jose','Lopez Lopez');
+insert into Sospechoso(Nombre,Apellidos)
+	values ('Raul','Osuna');
+insert into Sospechoso(Nombre,Apellidos)
+	values ('Roberto','Algo');
+	
+	
+insert into Acompanya values(1,2);
+insert into Acompanya values(1,3);
+insert into Acompanya values(1,9);
+insert into Acompanya values(2,4);
+insert into Acompanya values(5,2);
+insert into Acompanya values(3,6);
+insert into Acompanya values(6,7);
+insert into Acompanya values(9,10);
+insert into Acompanya values(8,5);
+
+
+insert into Antecedentes(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljs',1);
+insert into Antecedentes(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljasds',1);
+insert into Antecedentes(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljs',2);
+insert into Antecedentes(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljs',3);
+insert into Antecedentes(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljs',4);
+insert into Antecedentes(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldadsjkkaljs',4);
+insert into Antecedentes(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljs',5);
+insert into Antecedentes(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljs',7);
+insert into Antecedentes(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljs',10);
+	
+	
+insert into Correos(email,id_Sospechoso)
+	values('a@a.com',1);
+insert into Correos(email,id_Sospechoso)
+	values('a@a.com',2);
+insert into Correos(email,id_Sospechoso)
+	values('a@a.com',5);
+insert into Correos(email,id_Sospechoso)
+	values('a@a.com',6);
+insert into Correos(email,id_Sospechoso)
+	values('a@b.com',6);
+insert into Correos(email,id_Sospechoso)
+	values('a@a.com',7);
+insert into Correos(email,id_Sospechoso)
+	values('a@a.com',10);
+insert into Correos(email,id_Sospechoso)
+	values('a@b.com',1);
+insert into Correos(email,id_Sospechoso)
+	values('a@a.com',3);
+	
+insert into Direccion(Direccion,id_Sospechoso)
+	values('C/ menganita, 7',1);
+insert into Direccion(Direccion,id_Sospechoso)
+	values('C/ menganita, 8',2);
+insert into Direccion(Direccion,id_Sospechoso)
+	values('C/ menganita, 6',5);
+insert into Direccion(Direccion,id_Sospechoso)
+	values('C/ menganita, 8',6);
+insert into Direccion(Direccion,id_Sospechoso)
+	values('C/ menganita, 7',6);
+insert into Direccion(Direccion,id_Sospechoso)
+	values('C/ measdnganita, 7',7);
+insert into Direccion(Direccion,id_Sospechoso)
+	values('C/ menasdganita, 7',10);
+insert into Direccion(Direccion,id_Sospechoso)
+	values('C/ menasdganita, 7',1);
+insert into Direccion(Direccion,id_Sospechoso)
+	values('C/ menasdganita, 7',3);
+	
+	
+insert into Hechos(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljs',1);
+insert into Hechos(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljasds',1);
+insert into Hechos(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljs',2);
+insert into Hechos(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljs',3);
+insert into Hechos(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljs',4);
+insert into Hechos(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldadsjkkaljs',4);
+insert into Hechos(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljs',5);
+insert into Hechos(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljs',7);
+insert into Hechos(Descripcion,id_Sospechoso)
+	values('kasdjasdkaskldjkkaljs',10);
+
+
+insert into telefono(telefono,id_Sospechoso)
+	values(123,1);
+insert into telefono(telefono,id_Sospechoso)
+	values(121512,2);
+insert into telefono(telefono,id_Sospechoso)
+	values(125123,5);
+insert into telefono(telefono,id_Sospechoso)
+	values(1256124,6);
+insert into telefono(telefono,id_Sospechoso)
+	values(12512412,6);
+insert into telefono(telefono,id_Sospechoso)
+	values(12523123,7);
+insert into telefono(telefono,id_Sospechoso)
+	values(21312312512,10);
+insert into telefono(telefono,id_Sospechoso)
+	values(512123123,1);
+insert into telefono(telefono,id_Sospechoso)
+	values(213214212312,3);
+	
+insert into vehiculo(matricula,id_Sospechoso)
+	values('1111-AAA',1);
+insert into vehiculo(matricula,id_Sospechoso)
+	values('1111-AAA',2);
+insert into vehiculo(matricula,id_Sospechoso)
+	values('1111-AAA',5);
+insert into vehiculo(matricula,id_Sospechoso)
+	values('1111-AAA',6);
+insert into vehiculo(matricula,id_Sospechoso)
+	values('1111-BBB',6);
+insert into vehiculo(matricula,id_Sospechoso)
+	values('1111-AAA',7);
+insert into vehiculo(matricula,id_Sospechoso)
+	values('1111-AAA',10);
+insert into vehiculo(matricula,id_Sospechoso)
+	values('1111-BBB',1);
+insert into vehiculo(matricula,id_Sospechoso)
+	values('1111-AAA',3);
+
+
+	
