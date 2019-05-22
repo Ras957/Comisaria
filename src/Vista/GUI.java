@@ -45,7 +45,7 @@ public class GUI extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "ID", "Nombre", "Apellidosl"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -59,28 +59,41 @@ public class GUI extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "ID", "Nombre", "Apellidos"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        Insertar.setText("Nuevo");
+        Insertar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Anadir_Escala.png"))); // NOI18N
+        Insertar.setPreferredSize(new java.awt.Dimension(40, 40));
         Insertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InsertarActionPerformed(evt);
             }
         });
 
-        Buscar.setText("Buscar");
+        Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Buscar_Escala.png"))); // NOI18N
+        Buscar.setPreferredSize(new java.awt.Dimension(40, 40));
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
+            }
+        });
 
-        Eliminar.setText("Eliminar");
+        Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Eliminar_Escala.png"))); // NOI18N
+        Eliminar.setMaximumSize(new java.awt.Dimension(40, 40));
+        Eliminar.setMinimumSize(new java.awt.Dimension(40, 40));
+        Eliminar.setPreferredSize(new java.awt.Dimension(40, 40));
         Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EliminarActionPerformed(evt);
             }
         });
 
-        Modificar.setText("Modificar");
+        Modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Propiedades_Escala.png"))); // NOI18N
+        Modificar.setMaximumSize(new java.awt.Dimension(40, 40));
+        Modificar.setMinimumSize(new java.awt.Dimension(40, 40));
+        Modificar.setPreferredSize(new java.awt.Dimension(40, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,26 +109,26 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(Insertar)
-                        .addGap(37, 37, 37)
-                        .addComponent(Buscar)
-                        .addGap(43, 43, 43)
-                        .addComponent(Eliminar)
-                        .addGap(80, 80, 80)
-                        .addComponent(Modificar)))
+                        .addGap(47, 47, 47)
+                        .addComponent(Insertar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)
+                        .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Insertar)
-                    .addComponent(Buscar)
-                    .addComponent(Eliminar)
-                    .addComponent(Modificar))
-                .addGap(124, 124, 124)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Modificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Buscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Insertar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(120, 120, 120)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,7 +136,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -136,6 +149,10 @@ public class GUI extends javax.swing.JFrame {
     private void InsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_InsertarActionPerformed
+
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarActionPerformed
 
     /**
      * @param args the command line arguments
