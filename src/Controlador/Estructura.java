@@ -126,11 +126,11 @@ public class Estructura {
         return generada;
     }
     
-    public static ArrayList<Sospechoso> getPersonFromBBDD(Connection conn) throws SQLException {
+    public static ArrayList<Sospechoso> getPersonFromBBDD(Conexion conn) throws SQLException {
         ArrayList<Sospechoso> AllSos=new ArrayList<>();
         String id = "";
         
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM SOSPECHOSO WHERE  Id=?");
+        PreparedStatement stmt = conn.getMiConexion().prepareStatement("SELECT * FROM SOSPECHOSO WHERE  Id=?");
         stmt.setString(1, id);
         ResultSet rs=stmt.executeQuery();
         Sospechoso sos=new Sospechoso(0, null, null, null, null, null, null, null, null, null, null);
@@ -143,7 +143,7 @@ public class Estructura {
         stmt.close();
         
         ArrayList<Telefono> telefonos=new ArrayList<>();
-        stmt=conn.prepareStatement("SELECT * FROM TELEFONO WHERE  Id_Sospechoso=?");
+        stmt=conn.getMiConexion().prepareStatement("SELECT * FROM TELEFONO WHERE  Id_Sospechoso=?");
         stmt.setString(1, id);
         rs=stmt.executeQuery();
         while(rs.next()){
@@ -158,7 +158,7 @@ public class Estructura {
         stmt.close();
         
         ArrayList<Vehiculo> matriculas=new ArrayList<>();
-        stmt=conn.prepareStatement("SELECT * FROM VEHICULO WHERE  Id_Sospechoso=?");
+        stmt=conn.getMiConexion().prepareStatement("SELECT * FROM VEHICULO WHERE  Id_Sospechoso=?");
         stmt.setString(1, id);
         rs=stmt.executeQuery();
         while(rs.next()){
@@ -173,7 +173,7 @@ public class Estructura {
         stmt.close();
         
         ArrayList<Correo> correos=new ArrayList<>();
-        stmt=conn.prepareStatement("SELECT * FROM CORREOS WHERE  Id_Sospechoso=?");
+        stmt=conn.getMiConexion().prepareStatement("SELECT * FROM CORREOS WHERE  Id_Sospechoso=?");
         stmt.setString(1, id);
         rs=stmt.executeQuery();
         while(rs.next()){
@@ -188,7 +188,7 @@ public class Estructura {
         stmt.close();
         
         ArrayList<Direccion> direcciones=new ArrayList<>();
-        stmt=conn.prepareStatement("SELECT * FROM DIRECCION WHERE  Id_Sospechoso=?");
+        stmt=conn.getMiConexion().prepareStatement("SELECT * FROM DIRECCION WHERE  Id_Sospechoso=?");
         stmt.setString(1, id);
         rs=stmt.executeQuery();
         while(rs.next()){
@@ -218,7 +218,7 @@ public class Estructura {
         stmt.close();*/
         
         ArrayList<Hecho> hechos=new ArrayList<>();
-        stmt=conn.prepareStatement("SELECT * FROM HECHOS WHERE  Id_Sospechoso=?");
+        stmt=conn.getMiConexion().prepareStatement("SELECT * FROM HECHOS WHERE  Id_Sospechoso=?");
         stmt.setString(1, id);
         rs=stmt.executeQuery();
         while(rs.next()){
@@ -233,7 +233,7 @@ public class Estructura {
         stmt.close();
         
         ArrayList<Antecedente> antecedentes=new ArrayList<>();
-        stmt=conn.prepareStatement("SELECT * FROM ANTECEDENTES WHERE  Id_Sospechoso=?");
+        stmt=conn.getMiConexion().prepareStatement("SELECT * FROM ANTECEDENTES WHERE  Id_Sospechoso=?");
         stmt.setString(1, id);
         rs=stmt.executeQuery();
         while(rs.next()){
@@ -248,7 +248,7 @@ public class Estructura {
         stmt.close();
         
          ArrayList<Foto> fotos=new ArrayList<>();
-        stmt=conn.prepareStatement("SELECT * FROM FOTOS WHERE  Id_Sospechoso=?");
+        stmt=conn.getMiConexion().prepareStatement("SELECT * FROM FOTOS WHERE  Id_Sospechoso=?");
         stmt.setString(1, id);
         rs=stmt.executeQuery();
         while(rs.next()){
@@ -264,6 +264,37 @@ public class Estructura {
         stmt.close();
         
         return AllSos;
+    }
+    public static int borrarSospechoso(int codigo, Conexion myConexion){
+        String lineaSQL;
+		
+		PreparedStatement preparedStmt;
+		
+		int nFilas=0;
+		
+		
+		
+		lineaSQL="DELETE FROM SOSPECHOSO WHERE ID = ?";
+		try
+		{		
+		
+			
+			preparedStmt = myConexion.getMiConexion().prepareStatement(lineaSQL);
+			
+			
+		    preparedStmt.setInt (1, codigo);
+		
+			
+			nFilas=preparedStmt.executeUpdate();
+		       
+			
+		}catch(SQLException se)
+		{
+		
+			se.printStackTrace();
+		}
+		
+		return nFilas;
     }
 }
 
