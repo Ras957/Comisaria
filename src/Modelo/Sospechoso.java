@@ -41,6 +41,7 @@ public class Sospechoso {
         this.antecedentes = antecedentes;
         this.fotos = fotos;
     }
+
     
     
 
