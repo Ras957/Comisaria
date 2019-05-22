@@ -128,7 +128,7 @@ public class Estructura {
     
     public static int getMaxIDSospechoso(Conexion conn) throws SQLException{
         int id = 0;
-        PreparedStatement stmt = conn.getMiConexion().prepareStatement("Select max(id) from sospechoso");
+        PreparedStatement stmt = conn.getMiConexion().prepareStatement("Select max(id) Id from sospechoso");
         ResultSet rs=stmt.executeQuery();
         if(rs.next()){
             id = rs.getInt("Id");
@@ -275,6 +275,7 @@ public class Estructura {
         sos.setFotos(fotos);
         rs.close();
         stmt.close();
+        AllSos.add(sos);
         }
         
         return AllSos;

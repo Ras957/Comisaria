@@ -7,18 +7,26 @@ package Vista;
 
 import Controlador.Comisaria;
 import Controlador.Estructura;
+import Modelo.Metodos;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author dj_ra
  */
 public class GUI extends javax.swing.JFrame {
-
+public static DefaultTableModel modelo1=new DefaultTableModel();
+public static DefaultTableModel modelo2=new DefaultTableModel();
     /**
      * Creates new form GUI
      */
     public GUI() {
         initComponents();
+        modelo1=(DefaultTableModel)jTable1.getModel();
+        modelo2=(DefaultTableModel)jTable2.getModel();
     }
 
     /**
@@ -68,6 +76,7 @@ public class GUI extends javax.swing.JFrame {
         Buscar = new javax.swing.JButton();
         Eliminar = new javax.swing.JButton();
         Modificar = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         jConfirmacion.setMinimumSize(new java.awt.Dimension(672, 280));
 
@@ -311,6 +320,13 @@ public class GUI extends javax.swing.JFrame {
         Modificar.setMinimumSize(new java.awt.Dimension(40, 40));
         Modificar.setPreferredSize(new java.awt.Dimension(40, 40));
 
+        jButton4.setText("Actualizar");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -334,6 +350,10 @@ public class GUI extends javax.swing.JFrame {
                         .addGap(55, 55, 55)
                         .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(388, 388, 388))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,7 +364,9 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(Buscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Insertar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(120, 120, 120)
+                .addGap(85, 85, 85)
+                .addComponent(jButton4)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -384,6 +406,15 @@ public class GUI extends javax.swing.JFrame {
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         jConfirmacion.setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        
+    try {
+        Metodos.mostrarTabla(modelo1, Estructura.getPersonFromBBDD(Comisaria.con));
+    } catch (SQLException ex) {
+        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_jButton4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -438,6 +469,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JDialog jConfirmacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
