@@ -105,7 +105,7 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
                 .addGap(229, 229, 229)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(85, 85, 85)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jConfirmacionLayout.createSequentialGroup()
                 .addContainerGap(50, Short.MAX_VALUE)
@@ -400,6 +400,12 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
         int row=jTable1.getSelectedRow();
         int id =Integer.parseInt(jTable1.getValueAt(row, 0).toString());
         Estructura.borrarSospechoso(id,Comisaria.con);
+        modelo1.setRowCount(0);
+        try {
+            Metodos.mostrarTabla(modelo1, Estructura.getPersonFromBBDD(Comisaria.con));
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jConfirmacion.setVisible(false);
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -408,7 +414,7 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        
+        modelo1.setRowCount(0);
     try {
         Metodos.mostrarTabla(modelo1, Estructura.getPersonFromBBDD(Comisaria.con));
     } catch (SQLException ex) {
