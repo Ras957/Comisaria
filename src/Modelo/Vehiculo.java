@@ -6,8 +6,8 @@
 package Modelo;
 
 /**
- *
- * @author dj_ra
+ *  Clase que crea objetos Vehiculo.
+ * @author Daniel Perez Ramírez
  */
 public class Vehiculo {
     private int id;
@@ -65,6 +65,7 @@ public class Vehiculo {
     
     
 }
+
 
 
 

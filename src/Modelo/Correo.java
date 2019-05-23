@@ -6,8 +6,8 @@
 package Modelo;
 
 /**
- *
- * @author dj_ra
+ * Clase que crea objetos Correo.
+ * @author Samuel Osuna Alcaide
  */
 public class Correo {
      private int id;
@@ -63,6 +63,7 @@ public class Correo {
         this.idSospechoso = idSospechoso;
     }
 }
+
 
 
 

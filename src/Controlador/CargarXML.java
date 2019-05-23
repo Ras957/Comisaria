@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
 import Modelo.Conexion;
@@ -19,12 +14,17 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- *
- * @author dj_ra
+ *  Clase para conectarse a la Base de Datos a través de un archivo XML.
+ * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  */
 public class CargarXML {
     
-
+    /**
+     *  Metodo que lee un archivo XML para darle valores a los atributos del
+     * objeto Conexion pasado por parámetro.
+     * @param con Objeto Conexion para conectarse a la Base de Datos.
+     * @param archivo Nombre del archivo XML dentro del proyecto.
+     */
     public static void ConexionXML(Conexion con, String archivo) {
         File file=new File(archivo);
         DocumentBuilder dBuilder = null;
@@ -69,6 +69,9 @@ public class CargarXML {
     }
     
 }
+
+
+
 
 
 

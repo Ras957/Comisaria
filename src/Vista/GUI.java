@@ -14,8 +14,11 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author dj_ra
+ * Interfaz gráfica para interactuar con el usuario.
+ * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
+ * @author Samuel Osuna Alcaide
+ * @author Daniel Perez Ramírez
+ * @author Daniel Muriel Muñoz
  */
 public class GUI extends javax.swing.JFrame {
 public static DefaultTableModel modelo1=new DefaultTableModel();
@@ -63,9 +66,9 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
         Antecedente = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtHecho = new javax.swing.JTextArea();
-        jLabel4 = new javax.swing.JLabel();
+        Foto = new javax.swing.JLabel();
         subirFoto = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Guardar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -76,7 +79,7 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
         Buscar = new javax.swing.JButton();
         Eliminar = new javax.swing.JButton();
         Modificar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        Actualizar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
         jConfirmacion.setMinimumSize(new java.awt.Dimension(672, 280));
@@ -151,11 +154,11 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
         txtHecho.setRows(5);
         jScrollPane4.setViewportView(txtHecho);
 
-        jLabel4.setText("Foto");
+        Foto.setText("Foto");
 
         subirFoto.setText("Subir Archivo");
 
-        jButton3.setText("Guardar");
+        Guardar.setText("Guardar");
 
         javax.swing.GroupLayout FormularioLayout = new javax.swing.GroupLayout(Formulario.getContentPane());
         Formulario.getContentPane().setLayout(FormularioLayout);
@@ -196,7 +199,7 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
                                     .addComponent(Antecedente)
                                     .addComponent(Email1, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(Hecho, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(Foto, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(18, 18, 18)
                                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(subirFoto)
@@ -208,7 +211,7 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(FormularioLayout.createSequentialGroup()
                         .addGap(150, 150, 150)
-                        .addComponent(jButton3)))
+                        .addComponent(Guardar)))
                 .addContainerGap(390, Short.MAX_VALUE))
         );
         FormularioLayout.setVerticalGroup(
@@ -252,10 +255,10 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
                     .addComponent(Antecedente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(Foto)
                     .addComponent(subirFoto))
                 .addGap(50, 50, 50)
-                .addComponent(jButton3)
+                .addComponent(Guardar)
                 .addContainerGap())
         );
 
@@ -321,10 +324,10 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
         Modificar.setMinimumSize(new java.awt.Dimension(40, 40));
         Modificar.setPreferredSize(new java.awt.Dimension(40, 40));
 
-        jButton4.setText("Actualizar");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        Actualizar.setText("Actualizar");
+        Actualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
+                ActualizarMouseClicked(evt);
             }
         });
 
@@ -357,7 +360,7 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton5)
                 .addGap(35, 35, 35)
-                .addComponent(jButton4)
+                .addComponent(Actualizar)
                 .addGap(42, 42, 42))
         );
         layout.setVerticalGroup(
@@ -371,7 +374,7 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
                     .addComponent(Insertar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
+                    .addComponent(Actualizar)
                     .addComponent(jButton5))
                 .addGap(5, 5, 5)
                 .addComponent(jLabel1)
@@ -392,7 +395,7 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void InsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_InsertarActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
@@ -420,14 +423,14 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
         jConfirmacion.setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
 
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+    private void ActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActualizarMouseClicked
         modelo1.setRowCount(0);
     try {
         Metodos.mostrarTabla(modelo1, Estructura.getPersonFromBBDD(Comisaria.con));
     } catch (SQLException ex) {
         Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
     }
-    }//GEN-LAST:event_jButton4MouseClicked
+    }//GEN-LAST:event_ActualizarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -465,6 +468,7 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Actualizar;
     private javax.swing.JLabel Antecedente;
     private javax.swing.JLabel Apellidos;
     private javax.swing.JButton Buscar;
@@ -473,6 +477,8 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
     private javax.swing.JLabel Email;
     private javax.swing.JLabel Email1;
     private javax.swing.JFrame Formulario;
+    private javax.swing.JLabel Foto;
+    private javax.swing.JButton Guardar;
     private javax.swing.JLabel Hecho;
     private javax.swing.JLabel ID;
     private javax.swing.JButton Insertar;
@@ -481,14 +487,11 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
     private javax.swing.JLabel Telefono;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JDialog jConfirmacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

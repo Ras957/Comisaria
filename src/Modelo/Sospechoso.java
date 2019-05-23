@@ -8,8 +8,8 @@ package Modelo;
 import java.util.List;
 
 /**
- *
- * @author dj_ra
+ * Clase que crea objetos sospechosos.
+ * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  */
 public class Sospechoso {
     
@@ -206,6 +206,7 @@ public class Sospechoso {
     
     
 }
+
 
 
 

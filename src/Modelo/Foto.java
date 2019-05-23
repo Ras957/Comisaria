@@ -8,8 +8,8 @@ package Modelo;
 import java.awt.Image;
 
 /**
- *
- * @author dj_ra
+ *  Clase que crea objetos Imagen y hereda de Hecho.
+ * @author Daniel Muriel Muñoz
  */
 public class Foto extends Hecho{
     
@@ -34,6 +34,7 @@ public class Foto extends Hecho{
         this.imagen = imagen;
     }
 }
+
 
 
 

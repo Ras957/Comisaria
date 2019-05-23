@@ -5,13 +5,11 @@
  */
 package Modelo;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ *  Clase con metodos para agilizar procesos.
  * @author Samuel Osuna Alcaide
  * 
  */

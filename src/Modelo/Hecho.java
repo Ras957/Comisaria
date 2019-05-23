@@ -6,8 +6,8 @@
 package Modelo;
 
 /**
- *
- * @author dj_ra
+ * Clase que crea objetos Hecho.
+ * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  */
 public class Hecho {
     private int id;
@@ -65,6 +65,7 @@ public class Hecho {
     
     
 }
+
 
 
 

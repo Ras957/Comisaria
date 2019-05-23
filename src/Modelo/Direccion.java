@@ -7,7 +7,7 @@ package Modelo;
 
 /**
  *
- * @author dj_ra
+ * @author Daniel Perez Ramírez
  */
 public class Direccion {
     
@@ -66,6 +66,7 @@ public class Direccion {
     
     
 }
+
 
 
 

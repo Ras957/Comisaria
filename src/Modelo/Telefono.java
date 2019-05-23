@@ -6,8 +6,8 @@
 package Modelo;
 
 /**
- *
- * @author dj_ra
+ * Clase que crea objetos Telefono.
+ * @author Samuel Osuna Alcaide
  */
 public class Telefono {
      
@@ -67,6 +67,7 @@ public class Telefono {
     }
     
 }
+
 
 
 

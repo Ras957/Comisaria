@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
 import Modelo.Conexion;
@@ -10,7 +5,6 @@ import Modelo.*;
 import Modelo.Sospechoso;
 import Modelo.Telefono;
 import Modelo.Vehiculo;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,11 +12,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- *
- * @author dj_ra
+ * Clase que va a interactuar con la Base de Datos a través de sentencias
+ * SQL.
+ * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
+ * @author Samuel Osuna Alcaide
+ * @author Daniel Perez Ramírez
  */
 public class Estructura {
-    
+
+    /**
+     *  Método que crea las tablas en la Base de Datos.
+     * @param myConexion Objeto Conexion para conectarse a la Base de Datos.
+     * @return devuelve true si se crean las tablas en la Base de Datos.
+     */
     public static boolean generarEstructura(Conexion myConexion) {
         boolean generada = true;
         String lineaSQL;
@@ -125,97 +127,127 @@ public class Estructura {
         }
         return generada;
     }
-    
-    public static int getMaxIDSospechoso(Conexion conn) throws SQLException{
+
+    /**
+     *  Metodo para consultar el mayor ID.
+     * @param conn Objeto Conexion para conectarse a la Base de Datos.
+     * @return devuelve el Id del último sospechoso
+     * @throws SQLException
+     */
+    public static int getMaxIDSospechoso(Conexion conn) throws SQLException {
         int id = 0;
         PreparedStatement stmt = conn.getMiConexion().prepareStatement("Select max(id) id from sospechoso");
-        ResultSet rs=stmt.executeQuery();
-        if(rs.next()){
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
             id = rs.getInt("id");
         }
         return id;
     }
     
+    /**
+     *  Metodo para consultar el menor ID.
+     * @param conn Objeto Conexion para conectarse a la Base de Datos.
+     * @return devuelve el Id del último sospechoso
+     * @throws SQLException
+     */
+    public static int getMinIDSospechoso(Conexion conn) throws SQLException {
+        int id = 0;
+        PreparedStatement stmt = conn.getMiConexion().prepareStatement("Select min(id) id from sospechoso");
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            id = rs.getInt("id");
+        }
+        return id;
+    }
+
+    /**
+     *  Método que crea un ArrayList de sospechosos a través de consultas SQL. 
+     * Para los atributos múltiples se hace una consulta a parte para crear
+     * otro ArrayList del tipo indicado.
+     * @param conn Objeto Conexion para conectarse a la Base de Datos.
+     * @return devuelve un ArrayList de Sospechosos.
+     * @throws SQLException
+     */
     public static ArrayList<Sospechoso> getPersonFromBBDD(Conexion conn) throws SQLException {
-        ArrayList<Sospechoso> AllSos=new ArrayList<>();
-        int max=getMaxIDSospechoso(conn);
-        
-        for(int i=1;i<max+1;i++){
-        String id = Integer.toString((i));
-        
-        PreparedStatement stmt = conn.getMiConexion().prepareStatement("SELECT * FROM SOSPECHOSO WHERE  Id=?");
-        stmt.setString(1, id);
-        ResultSet rs=stmt.executeQuery();
-        Sospechoso sos=new Sospechoso(0, null, null, null, null, null, null, null, null, null, null);
-        if(rs.next()){
-            sos.setId(rs.getInt("Id"));
-            sos.setNombre(rs.getString("Nombre"));
-            sos.setApellidos(rs.getString("Apellidos"));
-        }
-        rs.close();
-        stmt.close();
-        
-        ArrayList<Telefono> telefonos=new ArrayList<>();
-        stmt=conn.getMiConexion().prepareStatement("SELECT * FROM TELEFONO WHERE  Id_Sospechoso=?");
-        stmt.setString(1, id);
-        rs=stmt.executeQuery();
-        while(rs.next()){
-            Telefono tel=new Telefono(0, null, 0);
-            tel.setId(rs.getInt("id"));
-            tel.setNumero(Integer.toString(rs.getInt("Telefono")));
-            tel.setIdSospechoso(rs.getInt("id_Sospechoso"));
-            telefonos.add(tel);
-        }
-        sos.setTelefonos(telefonos);
-        rs.close();
-        stmt.close();
-        
-        ArrayList<Vehiculo> matriculas=new ArrayList<>();
-        stmt=conn.getMiConexion().prepareStatement("SELECT * FROM VEHICULO WHERE  Id_Sospechoso=?");
-        stmt.setString(1, id);
-        rs=stmt.executeQuery();
-        while(rs.next()){
-            Vehiculo ve=new Vehiculo(0, null, 0);
-            ve.setId(rs.getInt("id"));
-            ve.setMatricula(rs.getString("Matricula"));
-            ve.setIdSospechoso(rs.getInt("id_Sospechoso"));
-            matriculas.add(ve);
-        }
-        sos.setMatriculas(matriculas);
-        rs.close();
-        stmt.close();
-        
-        ArrayList<Correo> correos=new ArrayList<>();
-        stmt=conn.getMiConexion().prepareStatement("SELECT * FROM CORREOS WHERE  Id_Sospechoso=?");
-        stmt.setString(1, id);
-        rs=stmt.executeQuery();
-        while(rs.next()){
-            Correo co=new Correo(0, null, 0);
-            co.setId(rs.getInt("id"));
-            co.setEmail(rs.getString("email"));
-            co.setIdSospechoso(rs.getInt("id_Sospechoso"));
-            correos.add(co);
-        }
-        sos.setCorreos(correos);
-        rs.close();
-        stmt.close();
-        
-        ArrayList<Direccion> direcciones=new ArrayList<>();
-        stmt=conn.getMiConexion().prepareStatement("SELECT * FROM DIRECCION WHERE  Id_Sospechoso=?");
-        stmt.setString(1, id);
-        rs=stmt.executeQuery();
-        while(rs.next()){
-            Direccion di=new Direccion(0, null, 0);
-            di.setId(rs.getInt("id"));
-            di.setDireccion(rs.getString("Direccion"));
-            di.setIdSospechoso(rs.getInt("id_Sospechoso"));
-            direcciones.add(di);
-        }
-        sos.setDirecciones(direcciones);
-        rs.close();
-        stmt.close();
-        
-        /*ArrayList<Sospechoso> acomps=new ArrayList<>();
+        ArrayList<Sospechoso> AllSos = new ArrayList<>();
+        int max = getMaxIDSospechoso(conn);
+
+        for (int i = 1; i < max + 1; i++) {
+            String id = Integer.toString((i));
+
+            PreparedStatement stmt = conn.getMiConexion().prepareStatement("SELECT * FROM SOSPECHOSO WHERE  Id=?");
+            stmt.setString(1, id);
+            ResultSet rs = stmt.executeQuery();
+            Sospechoso sos = new Sospechoso(0, null, null, null, null, null, null, null, null, null, null);
+            if (rs.next()) {
+                sos.setId(rs.getInt("Id"));
+                sos.setNombre(rs.getString("Nombre"));
+                sos.setApellidos(rs.getString("Apellidos"));
+            }
+            rs.close();
+            stmt.close();
+
+            ArrayList<Telefono> telefonos = new ArrayList<>();
+            stmt = conn.getMiConexion().prepareStatement("SELECT * FROM TELEFONO WHERE  Id_Sospechoso=?");
+            stmt.setString(1, id);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Telefono tel = new Telefono(0, null, 0);
+                tel.setId(rs.getInt("id"));
+                tel.setNumero(Integer.toString(rs.getInt("Telefono")));
+                tel.setIdSospechoso(rs.getInt("id_Sospechoso"));
+                telefonos.add(tel);
+            }
+            sos.setTelefonos(telefonos);
+            rs.close();
+            stmt.close();
+
+            ArrayList<Vehiculo> matriculas = new ArrayList<>();
+            stmt = conn.getMiConexion().prepareStatement("SELECT * FROM VEHICULO WHERE  Id_Sospechoso=?");
+            stmt.setString(1, id);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Vehiculo ve = new Vehiculo(0, null, 0);
+                ve.setId(rs.getInt("id"));
+                ve.setMatricula(rs.getString("Matricula"));
+                ve.setIdSospechoso(rs.getInt("id_Sospechoso"));
+                matriculas.add(ve);
+            }
+            sos.setMatriculas(matriculas);
+            rs.close();
+            stmt.close();
+
+            ArrayList<Correo> correos = new ArrayList<>();
+            stmt = conn.getMiConexion().prepareStatement("SELECT * FROM CORREOS WHERE  Id_Sospechoso=?");
+            stmt.setString(1, id);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Correo co = new Correo(0, null, 0);
+                co.setId(rs.getInt("id"));
+                co.setEmail(rs.getString("email"));
+                co.setIdSospechoso(rs.getInt("id_Sospechoso"));
+                correos.add(co);
+            }
+            sos.setCorreos(correos);
+            rs.close();
+            stmt.close();
+
+            ArrayList<Direccion> direcciones = new ArrayList<>();
+            stmt = conn.getMiConexion().prepareStatement("SELECT * FROM DIRECCION WHERE  Id_Sospechoso=?");
+            stmt.setString(1, id);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Direccion di = new Direccion(0, null, 0);
+                di.setId(rs.getInt("id"));
+                di.setDireccion(rs.getString("Direccion"));
+                di.setIdSospechoso(rs.getInt("id_Sospechoso"));
+                direcciones.add(di);
+            }
+            sos.setDirecciones(direcciones);
+            rs.close();
+            stmt.close();
+
+            /*ArrayList<Sospechoso> acomps=new ArrayList<>();
         stmt=conn.prepareStatement("SELECT * FROM ACOMPANYA WHERE  Id_Sospechoso1=?");
         stmt.setString(1, id);
         rs=stmt.executeQuery();
@@ -229,289 +261,320 @@ public class Estructura {
         sos.setCorreos(correos);
         rs.close();
         stmt.close();*/
-        
-        ArrayList<Hecho> hechos=new ArrayList<>();
-        stmt=conn.getMiConexion().prepareStatement("SELECT * FROM HECHOS WHERE  Id_Sospechoso=?");
-        stmt.setString(1, id);
-        rs=stmt.executeQuery();
-        while(rs.next()){
-            Hecho he=new Hecho(0, null, 0);
-            he.setId(rs.getInt("id"));
-            he.setDescripcion(rs.getString("Descripcion"));
-            he.setIdSospechoso(rs.getInt("id_Sospechoso"));
-            hechos.add(he);
+            ArrayList<Hecho> hechos = new ArrayList<>();
+            stmt = conn.getMiConexion().prepareStatement("SELECT * FROM HECHOS WHERE  Id_Sospechoso=?");
+            stmt.setString(1, id);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Hecho he = new Hecho(0, null, 0);
+                he.setId(rs.getInt("id"));
+                he.setDescripcion(rs.getString("Descripcion"));
+                he.setIdSospechoso(rs.getInt("id_Sospechoso"));
+                hechos.add(he);
+            }
+            sos.setHechos(hechos);
+            rs.close();
+            stmt.close();
+
+            ArrayList<Antecedente> antecedentes = new ArrayList<>();
+            stmt = conn.getMiConexion().prepareStatement("SELECT * FROM ANTECEDENTES WHERE  Id_Sospechoso=?");
+            stmt.setString(1, id);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Antecedente an = new Antecedente(0, null, 0);
+                an.setId(rs.getInt("id"));
+                an.setDescripcion(rs.getString("Descripcion"));
+                an.setIdSospechoso(rs.getInt("id_Sospechoso"));
+                antecedentes.add(an);
+            }
+            sos.setAntecedentes(antecedentes);
+            rs.close();
+            stmt.close();
+
+            ArrayList<Foto> fotos = new ArrayList<>();
+            stmt = conn.getMiConexion().prepareStatement("SELECT * FROM FOTOS WHERE  Id_Sospechoso=?");
+            stmt.setString(1, id);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Foto fo = new Foto(0, null, 0, null);
+                fo.setId(rs.getInt("id"));
+                fo.setDescripcion(rs.getString("Descripcion"));
+                //fo.setImagen(rs.getString("imagen"));
+                fo.setIdSospechoso(rs.getInt("id_Sospechoso"));
+                fotos.add(fo);
+            }
+            sos.setFotos(fotos);
+            rs.close();
+            stmt.close();
+
+            AllSos.add(sos);
         }
-        sos.setHechos(hechos);
-        rs.close();
-        stmt.close();
-        
-        ArrayList<Antecedente> antecedentes=new ArrayList<>();
-        stmt=conn.getMiConexion().prepareStatement("SELECT * FROM ANTECEDENTES WHERE  Id_Sospechoso=?");
-        stmt.setString(1, id);
-        rs=stmt.executeQuery();
-        while(rs.next()){
-            Antecedente an=new Antecedente(0, null, 0);
-            an.setId(rs.getInt("id"));
-            an.setDescripcion(rs.getString("Descripcion"));
-            an.setIdSospechoso(rs.getInt("id_Sospechoso"));
-            antecedentes.add(an);
-        }
-        sos.setAntecedentes(antecedentes);
-        rs.close();
-        stmt.close();
-        
-         ArrayList<Foto> fotos=new ArrayList<>();
-        stmt=conn.getMiConexion().prepareStatement("SELECT * FROM FOTOS WHERE  Id_Sospechoso=?");
-        stmt.setString(1, id);
-        rs=stmt.executeQuery();
-        while(rs.next()){
-            Foto fo=new Foto(0,null, 0, null);
-            fo.setId(rs.getInt("id"));
-            fo.setDescripcion(rs.getString("Descripcion"));
-            //fo.setImagen(rs.getString("imagen"));
-            fo.setIdSospechoso(rs.getInt("id_Sospechoso"));
-            fotos.add(fo);
-        }
-        sos.setFotos(fotos);
-        rs.close();
-        stmt.close();
-        
-        AllSos.add(sos);
-        }
-        
+
         return AllSos;
     }
-    public static int borrarSospechoso(int codigo, Conexion myConexion){
+
+    /**
+     *  Metodo para borrar al sospechoso de la Base de Datos.
+     * @param codigo Id del sospechoso.
+     * @param myConexion Objeto Conexion para conectarse a la Base de Datos.
+     * @return devuelve el número de filas o cero si está vacía.
+     */
+    public static int borrarSospechoso(int codigo, Conexion myConexion) {
         String lineaSQL;
-		
-		PreparedStatement preparedStmt;
-		
-		int nFilas=0;
-		
-		
-		
-		lineaSQL="DELETE FROM SOSPECHOSO WHERE ID = ?";
-		try
-		{		
-		
-			
-			preparedStmt = myConexion.getMiConexion().prepareStatement(lineaSQL);
-			
-			
-		    preparedStmt.setInt (1, codigo);
-		
-			
-			nFilas=preparedStmt.executeUpdate();
-		       
-			
-		}catch(SQLException se)
-		{
-		
-			se.printStackTrace();
-		}
-		
-		return nFilas;
+
+        PreparedStatement preparedStmt;
+
+        int nFilas = 0;
+
+        lineaSQL = "DELETE FROM SOSPECHOSO WHERE ID = ?";
+        try {
+
+            preparedStmt = myConexion.getMiConexion().prepareStatement(lineaSQL);
+
+            preparedStmt.setInt(1, codigo);
+
+            nFilas = preparedStmt.executeUpdate();
+
+        } catch (SQLException se) {
+
+            se.printStackTrace();
+        }
+
+        return nFilas;
     }
-    
-    public static boolean insertarSospechoso(String nombre, String apellidos, Conexion con) throws SQLException{
-        boolean devuelve=false;
-                
+
+    /**
+     * Método para insertar un sospechoso en la base de datos.
+     * @param nombre nombre del sospechoso.
+     * @param apellidos apellidos del sospechoso.
+     * @param con Objeto Conexion para conectarse a la Base de Datos.
+     * @return devuelve true si lo inserta.
+     * @throws SQLException
+     */
+    public static boolean insertarSospechoso(String nombre, String apellidos, Conexion con) throws SQLException {
+        boolean devuelve = false;
+
         String lineaSQL;
-        
+
         Statement sentencia;
 
         lineaSQL = "INSERT INTO SOSPECHOSO(nombre,apellidos) values(?,?);";
 
-        
         PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
-        
+
         sentencia = con.getMiConexion().createStatement();
-       
-			 preparedStmt.setString(1, nombre);
-			 preparedStmt.setString(2, apellidos);
-			 
-                           
-                         preparedStmt.execute();
-                         devuelve=true;
-        return devuelve;        
+
+        preparedStmt.setString(1, nombre);
+        preparedStmt.setString(2, apellidos);
+
+        preparedStmt.execute();
+        devuelve = true;
+        return devuelve;
     }
-    
-    public static boolean insertarVehiculo(String matricula, int id, Conexion con) throws SQLException{
+
+    /**
+     *  Método que inserta un vehículo en la Base de Datos.
+     * @param matricula codigo de la matrícula
+     * @param id del sospechoso.
+     * @param con Objeto Conexion para conectarse a la Base de Datos.
+     * @return devuelve true si lo inserta.
+     * @throws SQLException
+     */
+    public static boolean insertarVehiculo(String matricula, int id, Conexion con) throws SQLException {
         boolean devuelve;
-                
+
         String lineaSQL;
-        
+
         Statement sentencia;
 
         lineaSQL = "insert into vehiculo (matricula, id_Sospechoso) values(?,?);";
 
-        
         PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
-        
+
         sentencia = con.getMiConexion().createStatement();
-       
-			 preparedStmt.setString(1, matricula);
-			 preparedStmt.setInt(2, id);
-			 
-                           
-                         preparedStmt.execute();
-                         devuelve=true;
-        return devuelve;        
+
+        preparedStmt.setString(1, matricula);
+        preparedStmt.setInt(2, id);
+
+        preparedStmt.execute();
+        devuelve = true;
+        return devuelve;
     }
-    
-    public static boolean insertarCorreo(String email, int id, Conexion con) throws SQLException{
+
+    /**
+     *  Método que inserta un email en la Base de Datos.
+     * @param email dirreción de correo.
+     * @param id del sospechoso.
+     * @param con Objeto Conexion para conectarse a la Base de Datos.
+     * @return devuelve true si lo inserta.
+     * @throws SQLException
+     */
+    public static boolean insertarCorreo(String email, int id, Conexion con) throws SQLException {
         boolean devuelve;
-                
+
         String lineaSQL;
-        
+
         Statement sentencia;
 
         lineaSQL = "intert into correo(email,id_Sospechoso) values (?,?);";
 
-        
         PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
-        
+
         sentencia = con.getMiConexion().createStatement();
-       
-			 preparedStmt.setString(1, email);
-			 preparedStmt.setInt(2, id);
-			 
-                           
-                         preparedStmt.execute();
-                         devuelve=true;
-        return devuelve;        
+
+        preparedStmt.setString(1, email);
+        preparedStmt.setInt(2, id);
+
+        preparedStmt.execute();
+        devuelve = true;
+        return devuelve;
     }
-    
-    public static boolean insertarDireccion(String direccion, int id, Conexion con) throws SQLException{
+
+    /**
+     *  Método que inserta una direccion en la Base de Datos.
+     * @param direccion domicilio.
+     * @param id del sospechoso.
+     * @param con Objeto Conexion para conectarse a la Base de Datos.
+     * @return devuelve true si lo inserta.
+     * @throws SQLException
+     */
+    public static boolean insertarDireccion(String direccion, int id, Conexion con) throws SQLException {
         boolean devuelve;
-                
+
         String lineaSQL;
-        
+
         Statement sentencia;
 
         lineaSQL = "intert into direccion(direccion,id_Sospechoso) values(?,?);";
 
-        
         PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
-        
+
         sentencia = con.getMiConexion().createStatement();
-       
-			 preparedStmt.setString(1, direccion);
-			 preparedStmt.setInt(2, id);
-			 
-                           
-                         preparedStmt.execute();
-                         devuelve=true;
-        return devuelve;        
+
+        preparedStmt.setString(1, direccion);
+        preparedStmt.setInt(2, id);
+
+        preparedStmt.execute();
+        devuelve = true;
+        return devuelve;
     }
-    
-    public static boolean insertarTelefono(int telefono, int id, Conexion con) throws SQLException{
+
+    /**
+     *  Método que inserta un telefono en la Base de Datos.
+     * @param telefono número de telefono.
+     * @param id del sospechoso.
+     * @param con Objeto Conexion para conectarse a la Base de Datos.
+     * @return devuelve true si lo inserta.
+     * @throws SQLException
+     */
+    public static boolean insertarTelefono(int telefono, int id, Conexion con) throws SQLException {
         boolean devuelve;
-                
+
         String lineaSQL;
-        
+
         Statement sentencia;
 
         lineaSQL = "insert into telefono(telefono,id_Sospechoso) values(?,?);";
 
-        
         PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
-        
+
         sentencia = con.getMiConexion().createStatement();
-       
-			 preparedStmt.setInt(1, telefono);
-			 preparedStmt.setInt(2, id);
-			 
-                           
-                         preparedStmt.execute();
-                         devuelve=true;
-        return devuelve;        
+
+        preparedStmt.setInt(1, telefono);
+        preparedStmt.setInt(2, id);
+
+        preparedStmt.execute();
+        devuelve = true;
+        return devuelve;
     }
-    
-    public static boolean insertarAntecedentes(String desc, int id, Conexion con) throws SQLException{
+
+    /**
+     *  Método que inserta un Antecedente en la Base de Datos.
+     * @param desc  descripción.
+     * @param id del sospechoso.
+     * @param con Objeto Conexion para conectarse a la Base de Datos.
+     * @return devuelve true si lo inserta.
+     * @throws SQLException
+     */
+    public static boolean insertarAntecedentes(String desc, int id, Conexion con) throws SQLException {
         boolean devuelve;
-                
+
         String lineaSQL;
-        
+
         Statement sentencia;
 
         lineaSQL = "insert into antecedentes(descripcion, id_Sospechoso) values(?,?);";
 
-        
         PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
-        
+
         sentencia = con.getMiConexion().createStatement();
-       
-			 preparedStmt.setString(1, desc);
-			 preparedStmt.setInt(2, id);
-			 
-                           
-                         preparedStmt.execute();
-                         devuelve=true;
-        return devuelve;        
+
+        preparedStmt.setString(1, desc);
+        preparedStmt.setInt(2, id);
+
+        preparedStmt.execute();
+        devuelve = true;
+        return devuelve;
     }
-    
-    public static boolean insertarHechos(String desc, int id, Conexion con) throws SQLException{
+
+    /**
+     *  Método que inserta un Hecho en la Base de Datos.
+     * @param desc descripción.
+     * @param id del sospechoso.
+     * @param con Objeto Conexion para conectarse a la Base de Datos.
+     * @return devuelve true si lo inserta.
+     * @throws SQLException
+     */
+    public static boolean insertarHechos(String desc, int id, Conexion con) throws SQLException {
         boolean devuelve;
-                
+
         String lineaSQL;
-        
+
         Statement sentencia;
 
         lineaSQL = "insert into hechos(descripcion,id_Sospechoso) values(?,?);";
 
-        
         PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
-        
+
         sentencia = con.getMiConexion().createStatement();
-       
-			 preparedStmt.setString(1, desc);
-			 preparedStmt.setInt(2, id);
-			 
-                           
-                         preparedStmt.execute();
-                         devuelve=true;
-        return devuelve;        
+
+        preparedStmt.setString(1, desc);
+        preparedStmt.setInt(2, id);
+
+        preparedStmt.execute();
+        devuelve = true;
+        return devuelve;
     }
-    
-    public static boolean insertarFotos(String imagen, int id, Conexion con) throws SQLException{
+
+    /**
+     *  Método que inserta una Imagen en la Base de Datos.
+     * @param imagen en base64.
+     * @param id del sospechoso.
+     * @param con Objeto Conexion para conectarse a la Base de Datos.
+     * @return devuelve true si lo inserta.
+     * @throws SQLException
+     */
+    public static boolean insertarFotos(String imagen, int id, Conexion con) throws SQLException {
         boolean devuelve;
-                
+
         String lineaSQL;
-        
+
         Statement sentencia;
 
         lineaSQL = "insert into fotos(imagen, id_sospechoso) values (?, ?);";
 
-        
         PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
-        
+
         sentencia = con.getMiConexion().createStatement();
-       
-			 preparedStmt.setString(1, imagen);
-			 preparedStmt.setInt(2, id);
-			 
-                           
-                         preparedStmt.execute();
-                         devuelve=true;
-        return devuelve;        
-    }
-    
-    public static int ultimoSospechoso(Conexion con) throws SQLException{
-        int ultimoid;
-        
-        String lineaSQL;
-        
 
-        lineaSQL = "Select MAX(Id) AS id from SOSPECHOSO";
+        preparedStmt.setString(1, imagen);
+        preparedStmt.setInt(2, id);
 
-        
-        PreparedStatement conexion = con.getMiConexion().prepareStatement(lineaSQL);
-        
-        ResultSet rs = conexion.executeQuery();
-       
-			 ultimoid=rs.getInt("id");
-          
-        return ultimoid;
+        preparedStmt.execute();
+        devuelve = true;
+        return devuelve;
     }
+
 }
+
+

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 
 import Controlador.CargarXML;
@@ -11,8 +6,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
- * @author dj_ra
+ *  Clase Conexion que sirve para conectarnos a la Base de Datos.
+ * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  */
 public class Conexion {
     
@@ -28,6 +23,11 @@ public class Conexion {
         CargarXML.ConexionXML(this,"bbdd.xml");
     }
     
+    /**
+     * Aplicación del método Singleton.
+     * @return devuelve la Conexion si ya está creada o una nueva.
+     * @throws SQLException
+     */
     public static Conexion getInstance() throws SQLException {
         if (instance == null) {
             instance = new Conexion();
@@ -37,6 +37,11 @@ public class Conexion {
         return instance;
     }
     
+    /**
+     *  Método para establecer la conexion con la Base de Datos.
+     * @return  devuelve true si se conecta.
+     * @throws Exception
+     */
     public boolean conectar() throws Exception
 	{
 		try
@@ -146,6 +151,8 @@ public class Conexion {
     }
     
 }
+
+
 
 
 
