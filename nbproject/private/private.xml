@@ -3,12 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/src/Modelo/Conexion.java</file>
-            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/src/Controlador/Comisaria.java</file>
-            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/src/Controlador/CargarXML.java</file>
-            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/src/Vista/GUI.java</file>
-            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/src/Modelo/Antecedente.java</file>
-            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/src/Controlador/Estructura.java</file>
+            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/Comisaria/src/Modelo/Hecho.java</file>
+            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/Comisaria/src/Modelo/Sospechoso.java</file>
+            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/Comisaria/src/Modelo/Antecedente.java</file>
+            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/Comisaria/src/Modelo/Vehiculo.java</file>
+            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/Comisaria/src/Modelo/Foto.java</file>
+            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/Comisaria/src/Modelo/Direccion.java</file>
+            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/Comisaria/src/Modelo/Metodos.java</file>
+            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/Comisaria/src/Controlador/Comisaria.java</file>
+            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/Comisaria/src/Controlador/CargarXML.java</file>
+            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/Comisaria/src/Controlador/Estructura.java</file>
+            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/Comisaria/src/Modelo/Correo.java</file>
+            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/Comisaria/src/Vista/GUI.java</file>
+            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/Comisaria/src/Modelo/Telefono.java</file>
+            <file>file:/C:/Users/dj_ra/Google%20Drive/FPCS/PRO/NetBeans/Comisaria/Comisaria/src/Modelo/Conexion.java</file>
         </group>
     </open-files>
 </project-private>

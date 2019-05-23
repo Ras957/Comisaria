@@ -36,9 +36,17 @@ public class Comisaria {
             System.out.println("Tablas creadas correctamente");
         }
         vista.setVisible(true);
+        
     }
     
 }
+
+
+
+
+
+
+
 
 
 

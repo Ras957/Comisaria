@@ -65,6 +65,21 @@ public class Conexion {
          
 		return this.estado;
 	}
+    
+    public boolean cerrarConexion() throws Exception
+	{
+		boolean seCerro=false;
+		try
+		{
+			this.miConexion.close();
+			seCerro=true;
+			
+		}catch(SQLException se){
+			se.printStackTrace();
+		}
+		return seCerro;
+		
+	}
 
     /**
      * @return the host
@@ -151,6 +166,7 @@ public class Conexion {
     }
     
 }
+
 
 
 
