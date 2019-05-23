@@ -12,8 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * Clase que va a interactuar con la Base de Datos a través de sentencias
- * SQL.
+ * Clase que va a interactuar con la Base de Datos a través de sentencias SQL.
+ *
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * @author Samuel Osuna Alcaide
  * @author Daniel Perez Ramírez
@@ -21,7 +21,8 @@ import java.util.ArrayList;
 public class Estructura {
 
     /**
-     *  Método que crea las tablas en la Base de Datos.
+     * Método que crea las tablas en la Base de Datos.
+     *
      * @param myConexion Objeto Conexion para conectarse a la Base de Datos.
      * @return devuelve true si se crean las tablas en la Base de Datos.
      */
@@ -51,7 +52,7 @@ public class Estructura {
 
             lineaSQL = "CREATE TABLE IF NOT EXISTS TELEFONO("
                     + "    Id               integer primary key AUTO_INCREMENT,"
-                    + "    Telefono         int(10),"
+                    + "    Telefono         varchar(10),"
                     + "    Tipo             varchar(20),"
                     + "    id_Sospechoso    integer,"
                     + "    foreign key (id_Sospechoso) references Sospechoso(Id) on delete cascade"
@@ -129,7 +130,8 @@ public class Estructura {
     }
 
     /**
-     *  Metodo para consultar el mayor ID.
+     * Metodo para consultar el mayor ID.
+     *
      * @param conn Objeto Conexion para conectarse a la Base de Datos.
      * @return devuelve el Id del último sospechoso
      * @throws SQLException
@@ -143,9 +145,10 @@ public class Estructura {
         }
         return id;
     }
-    
+
     /**
-     *  Metodo para consultar el menor ID.
+     * Metodo para consultar el menor ID.
+     *
      * @param conn Objeto Conexion para conectarse a la Base de Datos.
      * @return devuelve el Id del último sospechoso
      * @throws SQLException
@@ -161,9 +164,10 @@ public class Estructura {
     }
 
     /**
-     *  Método que crea un ArrayList de sospechosos a través de consultas SQL. 
-     * Para los atributos múltiples se hace una consulta a parte para crear
-     * otro ArrayList del tipo indicado.
+     * Método que crea un ArrayList de sospechosos a través de consultas SQL.
+     * Para los atributos múltiples se hace una consulta a parte para crear otro
+     * ArrayList del tipo indicado.
+     *
      * @param conn Objeto Conexion para conectarse a la Base de Datos.
      * @return devuelve un ArrayList de Sospechosos.
      * @throws SQLException
@@ -194,7 +198,7 @@ public class Estructura {
             while (rs.next()) {
                 Telefono tel = new Telefono(0, null, 0);
                 tel.setId(rs.getInt("id"));
-                tel.setNumero(Integer.toString(rs.getInt("Telefono")));
+                tel.setNumero(rs.getString("Telefono"));
                 tel.setIdSospechoso(rs.getInt("id_Sospechoso"));
                 telefonos.add(tel);
             }
@@ -247,20 +251,21 @@ public class Estructura {
             rs.close();
             stmt.close();
 
-            /*ArrayList<Sospechoso> acomps=new ArrayList<>();
-        stmt=conn.prepareStatement("SELECT * FROM ACOMPANYA WHERE  Id_Sospechoso1=?");
-        stmt.setString(1, id);
-        rs=stmt.executeQuery();
-        while(rs.next()){
-            Sospechoso aco=new Sospechoso(0, null, null, null, null, null, null, null, null, null, null);
-            sos.setId(rs.getInt("Id"));
-            sos.setNombre(rs.getString("Nombre"));
-            sos.setApellidos(rs.getString("Apellidos"));
-            acomps.add(aco);
-        }
-        sos.setCorreos(correos);
-        rs.close();
-        stmt.close();*/
+            /*ArrayList<Sospechoso> acomps = new ArrayList<>();
+            stmt = conn.getMiConexion().prepareStatement("SELECT * FROM ACOMPANYA WHERE  Id_Sospechoso1=?");
+            stmt.setString(1, id);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Sospechoso aco = new Sospechoso(0, null, null, null, null, null, null, null, null, null, null);
+                sos.setId(rs.getInt("Id"));
+                sos.setNombre(rs.getString("Nombre"));
+                sos.setApellidos(rs.getString("Apellidos"));
+                acomps.add(aco);
+            }
+            sos.setCorreos(correos);
+            rs.close();
+            stmt.close();*/
+
             ArrayList<Hecho> hechos = new ArrayList<>();
             stmt = conn.getMiConexion().prepareStatement("SELECT * FROM HECHOS WHERE  Id_Sospechoso=?");
             stmt.setString(1, id);
@@ -314,7 +319,8 @@ public class Estructura {
     }
 
     /**
-     *  Metodo para borrar al sospechoso de la Base de Datos.
+     * Metodo para borrar al sospechoso de la Base de Datos.
+     *
      * @param codigo Id del sospechoso.
      * @param myConexion Objeto Conexion para conectarse a la Base de Datos.
      * @return devuelve el número de filas o cero si está vacía.
@@ -345,6 +351,7 @@ public class Estructura {
 
     /**
      * Método para insertar un sospechoso en la base de datos.
+     *
      * @param nombre nombre del sospechoso.
      * @param apellidos apellidos del sospechoso.
      * @param con Objeto Conexion para conectarse a la Base de Datos.
@@ -373,7 +380,8 @@ public class Estructura {
     }
 
     /**
-     *  Método que inserta un vehículo en la Base de Datos.
+     * Método que inserta un vehículo en la Base de Datos.
+     *
      * @param matricula codigo de la matrícula
      * @param id del sospechoso.
      * @param con Objeto Conexion para conectarse a la Base de Datos.
@@ -402,7 +410,8 @@ public class Estructura {
     }
 
     /**
-     *  Método que inserta un email en la Base de Datos.
+     * Método que inserta un email en la Base de Datos.
+     *
      * @param email dirreción de correo.
      * @param id del sospechoso.
      * @param con Objeto Conexion para conectarse a la Base de Datos.
@@ -416,7 +425,7 @@ public class Estructura {
 
         Statement sentencia;
 
-        lineaSQL = "intert into correo(email,id_Sospechoso) values (?,?);";
+        lineaSQL = "insert into correos(email,id_Sospechoso) values (?,?);";
 
         PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
 
@@ -431,7 +440,8 @@ public class Estructura {
     }
 
     /**
-     *  Método que inserta una direccion en la Base de Datos.
+     * Método que inserta una direccion en la Base de Datos.
+     *
      * @param direccion domicilio.
      * @param id del sospechoso.
      * @param con Objeto Conexion para conectarse a la Base de Datos.
@@ -445,7 +455,7 @@ public class Estructura {
 
         Statement sentencia;
 
-        lineaSQL = "intert into direccion(direccion,id_Sospechoso) values(?,?);";
+        lineaSQL = "insert into direccion(direccion,id_Sospechoso) values(?,?);";
 
         PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
 
@@ -460,14 +470,15 @@ public class Estructura {
     }
 
     /**
-     *  Método que inserta un telefono en la Base de Datos.
+     * Método que inserta un telefono en la Base de Datos.
+     *
      * @param telefono número de telefono.
      * @param id del sospechoso.
      * @param con Objeto Conexion para conectarse a la Base de Datos.
      * @return devuelve true si lo inserta.
      * @throws SQLException
      */
-    public static boolean insertarTelefono(int telefono, int id, Conexion con) throws SQLException {
+    public static boolean insertarTelefono(String telefono, int id, Conexion con) throws SQLException {
         boolean devuelve;
 
         String lineaSQL;
@@ -480,7 +491,7 @@ public class Estructura {
 
         sentencia = con.getMiConexion().createStatement();
 
-        preparedStmt.setInt(1, telefono);
+        preparedStmt.setString(1, telefono);
         preparedStmt.setInt(2, id);
 
         preparedStmt.execute();
@@ -489,8 +500,9 @@ public class Estructura {
     }
 
     /**
-     *  Método que inserta un Antecedente en la Base de Datos.
-     * @param desc  descripción.
+     * Método que inserta un Antecedente en la Base de Datos.
+     *
+     * @param desc descripción.
      * @param id del sospechoso.
      * @param con Objeto Conexion para conectarse a la Base de Datos.
      * @return devuelve true si lo inserta.
@@ -518,7 +530,8 @@ public class Estructura {
     }
 
     /**
-     *  Método que inserta un Hecho en la Base de Datos.
+     * Método que inserta un Hecho en la Base de Datos.
+     *
      * @param desc descripción.
      * @param id del sospechoso.
      * @param con Objeto Conexion para conectarse a la Base de Datos.
@@ -547,7 +560,8 @@ public class Estructura {
     }
 
     /**
-     *  Método que inserta una Imagen en la Base de Datos.
+     * Método que inserta una Imagen en la Base de Datos.
+     *
      * @param imagen en base64.
      * @param id del sospechoso.
      * @param con Objeto Conexion para conectarse a la Base de Datos.
@@ -576,5 +590,10 @@ public class Estructura {
     }
 
 }
+
+
+
+
+
 
 

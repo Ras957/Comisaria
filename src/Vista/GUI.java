@@ -11,6 +11,7 @@ import Modelo.Metodos;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,8 +29,8 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
      */
     public GUI() {
         initComponents();
-        modelo1=(DefaultTableModel)jTable1.getModel();
-        modelo2=(DefaultTableModel)jTable2.getModel();
+        modelo1=(DefaultTableModel)TablaSospechosos.getModel();
+        modelo2=(DefaultTableModel)TablaRelacionados.getModel();
     }
 
     /**
@@ -43,11 +44,10 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
 
         jConfirmacion = new javax.swing.JDialog();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        si = new javax.swing.JButton();
+        no = new javax.swing.JButton();
         Formulario = new javax.swing.JFrame();
         ID = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
         Nombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         Apellidos = new javax.swing.JLabel();
@@ -69,12 +69,13 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
         Foto = new javax.swing.JLabel();
         subirFoto = new javax.swing.JButton();
         Guardar = new javax.swing.JButton();
+        jFileChooser1 = new javax.swing.JFileChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaSospechosos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        TablaRelacionados = new javax.swing.JTable();
         Insertar = new javax.swing.JButton();
         Buscar = new javax.swing.JButton();
         Eliminar = new javax.swing.JButton();
@@ -87,17 +88,17 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("¿Está seguro de que quiere eliminar este sospechoso?");
 
-        jButton1.setText("Si");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        si.setText("Si");
+        si.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                siMouseClicked(evt);
             }
         });
 
-        jButton2.setText("No");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        no.setText("No");
+        no.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                noMouseClicked(evt);
             }
         });
 
@@ -107,9 +108,9 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
             jConfirmacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jConfirmacionLayout.createSequentialGroup()
                 .addGap(229, 229, 229)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(si, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(85, 85, 85)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(no, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jConfirmacionLayout.createSequentialGroup()
                 .addContainerGap(50, Short.MAX_VALUE)
@@ -123,12 +124,15 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
                 .addComponent(jLabel3)
                 .addGap(89, 89, 89)
                 .addGroup(jConfirmacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(si, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(no, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(64, 64, 64))
         );
 
-        ID.setText("ID");
+        Formulario.setMinimumSize(new java.awt.Dimension(400, 570));
+        Formulario.setPreferredSize(new java.awt.Dimension(400, 570));
+
+        ID.setText("FORMULARIO DE SOSPECHOSO");
 
         Nombre.setText("Nombre");
 
@@ -157,8 +161,18 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
         Foto.setText("Foto");
 
         subirFoto.setText("Subir Archivo");
+        subirFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subirFotoActionPerformed(evt);
+            }
+        });
 
         Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout FormularioLayout = new javax.swing.GroupLayout(Formulario.getContentPane());
         Formulario.getContentPane().setLayout(FormularioLayout);
@@ -185,10 +199,6 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
                                 .addComponent(Apellidos)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FormularioLayout.createSequentialGroup()
-                                .addComponent(ID)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(FormularioLayout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addComponent(Nombre)
@@ -211,17 +221,18 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(FormularioLayout.createSequentialGroup()
                         .addGap(150, 150, 150)
-                        .addComponent(Guardar)))
-                .addContainerGap(390, Short.MAX_VALUE))
+                        .addComponent(Guardar))
+                    .addGroup(FormularioLayout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(ID)))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         FormularioLayout.setVerticalGroup(
             FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FormularioLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ID)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(ID)
+                .addGap(28, 28, 28)
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Nombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -253,7 +264,7 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Antecedente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(FormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Foto)
                     .addComponent(subirFoto))
@@ -264,29 +275,29 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaSospechosos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nombre", "Apellidos"
+                "ID", "Nombre", "Apellidos", "Correos", "Telefonos", "Direcciones", "Matriculas", "Antecedentes", "Hechos", "Fotos"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TablaSospechosos);
 
         jLabel1.setText("Sospechosos en la base de datos");
 
         jLabel2.setText("Sospechosos relacionados");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        TablaRelacionados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nombre", "Apellidos"
+                "ID", "Nombre", "Apellidos", "Correos", "Telefonos", "Direcciones", "Matriculas", "Antecedentes", "Hechos", "Fotos"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(TablaRelacionados);
 
         Insertar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Anadir_Escala.png"))); // NOI18N
         Insertar.setPreferredSize(new java.awt.Dimension(40, 40));
@@ -342,9 +353,7 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
@@ -355,12 +364,16 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
                         .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
                         .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(594, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(35, 35, 35)
-                .addComponent(Actualizar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton5)
+                        .addGap(35, 35, 35)
+                        .addComponent(Actualizar)))
                 .addGap(42, 42, 42))
         );
         layout.setVerticalGroup(
@@ -395,7 +408,7 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void InsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarActionPerformed
-        
+        Formulario.setVisible(true);
     }//GEN-LAST:event_InsertarActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
@@ -406,9 +419,9 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
         jConfirmacion.setVisible(true);
     }//GEN-LAST:event_EliminarMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        int row=jTable1.getSelectedRow();
-        int id =Integer.parseInt(jTable1.getValueAt(row, 0).toString());
+    private void siMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_siMouseClicked
+        int row=TablaSospechosos.getSelectedRow();
+        int id =Integer.parseInt(TablaSospechosos.getValueAt(row, 0).toString());
         Estructura.borrarSospechoso(id,Comisaria.con);
         modelo1.setRowCount(0);
         try {
@@ -417,11 +430,11 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         jConfirmacion.setVisible(false);
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_siMouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void noMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noMouseClicked
         jConfirmacion.setVisible(false);
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_noMouseClicked
 
     private void ActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActualizarMouseClicked
         modelo1.setRowCount(0);
@@ -431,6 +444,26 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
         Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
     }
     }//GEN-LAST:event_ActualizarMouseClicked
+
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+    try {
+        Estructura.insertarSospechoso(txtNombre.getText(), txtApellidos.getText(), Comisaria.con);
+        int id = Estructura.getMaxIDSospechoso(Comisaria.con);
+        Estructura.insertarTelefono(txtTelefono.getText(), id, Comisaria.con);
+        Estructura.insertarDireccion(txtDireccion.getText(), id, Comisaria.con);
+        Estructura.insertarCorreo(txtEmail.getText(), id, Comisaria.con);
+        Estructura.insertarVehiculo(txtVehiculo.getText(), id, Comisaria.con);
+        Estructura.insertarHechos(txtHecho.getText(), id, Comisaria.con);
+        Estructura.insertarAntecedentes(txtAntecedente.getText(), id, Comisaria.con);
+        JOptionPane.showMessageDialog(null, "Sospechoso Guardado");
+                } catch (SQLException ex) {
+        Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_GuardarActionPerformed
+
+    private void subirFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subirFotoActionPerformed
+        jFileChooser1.setVisible(true);
+    }//GEN-LAST:event_subirFotoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -484,11 +517,12 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
     private javax.swing.JButton Insertar;
     private javax.swing.JButton Modificar;
     private javax.swing.JLabel Nombre;
+    private javax.swing.JTable TablaRelacionados;
+    private javax.swing.JTable TablaSospechosos;
     private javax.swing.JLabel Telefono;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JDialog jConfirmacion;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -496,15 +530,14 @@ public static DefaultTableModel modelo2=new DefaultTableModel();
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JButton no;
+    private javax.swing.JButton si;
     private javax.swing.JButton subirFoto;
     private javax.swing.JTextArea txtAntecedente;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextArea txtHecho;
-    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtVehiculo;

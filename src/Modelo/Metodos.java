@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
  * 
  */
 public class Metodos {
+   
     public static void mostrarTabla(DefaultTableModel m, ArrayList<Sospechoso> sos){
         int size=sos.size();
         
@@ -100,3 +101,14 @@ public class Metodos {
         return devolver;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
