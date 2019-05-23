@@ -27,7 +27,7 @@ public class Metodos {
     }
     
     public static String mostrarTelefonos(Sospechoso sos){
-       String devolver = null;
+       String devolver = "";
        int sizeTelefonos=sos.getTelefonos().size();
        for(int i=0;i<sizeTelefonos;i++){
            String tel=sos.getTelefonos().get(i).getNumero();
@@ -38,18 +38,20 @@ public class Metodos {
     }
     
     public static String mostrarCorreos(Sospechoso sos){
-       String devolver = null;
+       String devolver = "";
        int sizelist=sos.getCorreos().size();
        for(int i=0;i<sizelist;i++){
-           String tel=sos.getCorreos().get(i).getEmail();
-           String cadena=(tel);
-           devolver+=cadena+"\n";
+           if(sos.getCorreos().get(i)!=null){
+            String tel=sos.getCorreos().get(i).getEmail();
+            String cadena=(tel);
+            devolver+=cadena+"\n";
+           }
        }
       return devolver;
     }
     
     public static String mostrarMatricula(Sospechoso sos){
-       String devolver = null;
+       String devolver = "";
        int sizelist=sos.getMatriculas().size();
        for(int i=0;i<sizelist;i++){
            String tel=sos.getMatriculas().get(i).getMatricula();
@@ -59,7 +61,7 @@ public class Metodos {
       return devolver;
     }
     public static String mostrarDireccion(Sospechoso sos){
-       String devolver = null;
+       String devolver = "";
        int sizelist=sos.getDirecciones().size();
        for(int i=0;i<sizelist;i++){
            String tel=sos.getDirecciones().get(i).getDireccion();
@@ -69,7 +71,7 @@ public class Metodos {
       return devolver;
     }
     public static String mostrarAntecedentes(Sospechoso sos){
-       String devolver = null;
+       String devolver = "";
        int sizelist=sos.getAntecedentes().size();
        for(int i=0;i<sizelist;i++){
            String tel=sos.getAntecedentes().get(i).getDescripcion();
@@ -79,7 +81,7 @@ public class Metodos {
       return devolver;
     }
     public static String mostrarHechos(Sospechoso sos){
-       String devolver = null;
+       String devolver = "";
        int sizelist=sos.getHechos().size();
        for(int i=0;i<sizelist;i++){
            String tel=sos.getHechos().get(i).getDescripcion();

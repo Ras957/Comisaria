@@ -312,11 +312,206 @@ public class Estructura {
 		
 		return nFilas;
     }
+    
+    public static boolean insertarSospechoso(String nombre, String apellidos, Conexion con) throws SQLException{
+        boolean devuelve=false;
+                
+        String lineaSQL;
+        
+        Statement sentencia;
+
+        lineaSQL = "INSERT INTO SOSPECHOSO(nombre,apellidos) values(?,?);";
+
+        
+        PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
+        
+        sentencia = con.getMiConexion().createStatement();
+       
+			 preparedStmt.setString(1, nombre);
+			 preparedStmt.setString(2, apellidos);
+			 
+                           
+                         preparedStmt.execute();
+                         devuelve=true;
+        return devuelve;        
+    }
+    
+    public static boolean insertarVehiculo(String matricula, int id, Conexion con) throws SQLException{
+        boolean devuelve;
+                
+        String lineaSQL;
+        
+        Statement sentencia;
+
+        lineaSQL = "insert into vehiculo (matricula, id_Sospechoso) values(?,?);";
+
+        
+        PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
+        
+        sentencia = con.getMiConexion().createStatement();
+       
+			 preparedStmt.setString(1, matricula);
+			 preparedStmt.setInt(2, id);
+			 
+                           
+                         preparedStmt.execute();
+                         devuelve=true;
+        return devuelve;        
+    }
+    
+    public static boolean insertarCorreo(String email, int id, Conexion con) throws SQLException{
+        boolean devuelve;
+                
+        String lineaSQL;
+        
+        Statement sentencia;
+
+        lineaSQL = "intert into correo(email,id_Sospechoso) values (?,?);";
+
+        
+        PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
+        
+        sentencia = con.getMiConexion().createStatement();
+       
+			 preparedStmt.setString(1, email);
+			 preparedStmt.setInt(2, id);
+			 
+                           
+                         preparedStmt.execute();
+                         devuelve=true;
+        return devuelve;        
+    }
+    
+    public static boolean insertarDireccion(String direccion, int id, Conexion con) throws SQLException{
+        boolean devuelve;
+                
+        String lineaSQL;
+        
+        Statement sentencia;
+
+        lineaSQL = "intert into direccion(direccion,id_Sospechoso) values(?,?);";
+
+        
+        PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
+        
+        sentencia = con.getMiConexion().createStatement();
+       
+			 preparedStmt.setString(1, direccion);
+			 preparedStmt.setInt(2, id);
+			 
+                           
+                         preparedStmt.execute();
+                         devuelve=true;
+        return devuelve;        
+    }
+    
+    public static boolean insertarTelefono(int telefono, int id, Conexion con) throws SQLException{
+        boolean devuelve;
+                
+        String lineaSQL;
+        
+        Statement sentencia;
+
+        lineaSQL = "insert into telefono(telefono,id_Sospechoso) values(?,?);";
+
+        
+        PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
+        
+        sentencia = con.getMiConexion().createStatement();
+       
+			 preparedStmt.setInt(1, telefono);
+			 preparedStmt.setInt(2, id);
+			 
+                           
+                         preparedStmt.execute();
+                         devuelve=true;
+        return devuelve;        
+    }
+    
+    public static boolean insertarAntecedentes(String desc, int id, Conexion con) throws SQLException{
+        boolean devuelve;
+                
+        String lineaSQL;
+        
+        Statement sentencia;
+
+        lineaSQL = "insert into antecedentes(descripcion, id_Sospechoso) values(?,?);";
+
+        
+        PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
+        
+        sentencia = con.getMiConexion().createStatement();
+       
+			 preparedStmt.setString(1, desc);
+			 preparedStmt.setInt(2, id);
+			 
+                           
+                         preparedStmt.execute();
+                         devuelve=true;
+        return devuelve;        
+    }
+    
+    public static boolean insertarHechos(String desc, int id, Conexion con) throws SQLException{
+        boolean devuelve;
+                
+        String lineaSQL;
+        
+        Statement sentencia;
+
+        lineaSQL = "insert into hechos(descripcion,id_Sospechoso) values(?,?);";
+
+        
+        PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
+        
+        sentencia = con.getMiConexion().createStatement();
+       
+			 preparedStmt.setString(1, desc);
+			 preparedStmt.setInt(2, id);
+			 
+                           
+                         preparedStmt.execute();
+                         devuelve=true;
+        return devuelve;        
+    }
+    
+    public static boolean insertarFotos(String imagen, int id, Conexion con) throws SQLException{
+        boolean devuelve;
+                
+        String lineaSQL;
+        
+        Statement sentencia;
+
+        lineaSQL = "insert into fotos(imagen, id_sospechoso) values (?, ?);";
+
+        
+        PreparedStatement preparedStmt = con.getMiConexion().prepareStatement(lineaSQL);
+        
+        sentencia = con.getMiConexion().createStatement();
+       
+			 preparedStmt.setString(1, imagen);
+			 preparedStmt.setInt(2, id);
+			 
+                           
+                         preparedStmt.execute();
+                         devuelve=true;
+        return devuelve;        
+    }
+    
+    public static int ultimoSospechoso(Conexion con) throws SQLException{
+        int ultimoid;
+        
+        String lineaSQL;
+        
+
+        lineaSQL = "Select MAX(Id) AS id from SOSPECHOSO";
+
+        
+        PreparedStatement conexion = con.getMiConexion().prepareStatement(lineaSQL);
+        
+        ResultSet rs = conexion.executeQuery();
+       
+			 ultimoid=rs.getInt("id");
+          
+        return ultimoid;
+    }
 }
-
-
-
-
-
-
-
